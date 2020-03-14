@@ -1,7 +1,7 @@
 package com.yxqy.queue.core;
 
 import com.yxqy.common.extension.SPI;
-import com.yxqy.domain.JobMsg;
+import com.yxqy.domain.JobMessage;
 import com.yxqy.exception.ConsumeQueueException;
 
 /**
@@ -9,5 +9,5 @@ import com.yxqy.exception.ConsumeQueueException;
  */
 @SPI("consoleCQ")
 public interface ConsumeQueueProvider {
-    void consumer(JobMsg j) throws ConsumeQueueException;
+    void consumer(JobMessage j) throws ConsumeQueueException;
 }

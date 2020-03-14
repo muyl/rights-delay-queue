@@ -1,6 +1,6 @@
 package com.yxqy.redis;
 
-import com.yxqy.domain.JobMsg;
+import com.yxqy.domain.JobMessage;
 import com.yxqy.domain.Status;
 import com.yxqy.exception.DelayQueueException;
 import com.yxqy.queue.core.Queue;
@@ -36,7 +36,7 @@ public class RedisQueueImpl implements Queue, java.io.Closeable{
 
 
     @Override
-    public void push(JobMsg job) throws DelayQueueException {
+    public void push(JobMessage job) throws DelayQueueException {
         try {
             Assert.notNull(job, "Job不能为空");
             Assert.notNull(job.getId(), "JobId 不能为空");
@@ -74,7 +74,7 @@ public class RedisQueueImpl implements Queue, java.io.Closeable{
     }
 
     @Override
-    public JobMsg getJob(String jobId) {
+    public JobMessage getJob(String jobId) {
         return null;
     }
 

@@ -1,13 +1,12 @@
 package com.yxqy.redis.bucket;
 
-import com.yxqy.domain.JobMsg;
+import com.yxqy.domain.JobMessage;
 import com.yxqy.domain.Status;
 import com.yxqy.redis.JobOperationService;
 import com.yxqy.redis.event.JobEventBus;
 import com.yxqy.redis.event.RedisJobTraceEvent;
 import com.yxqy.redis.support.DistributedLock;
 import com.yxqy.redis.support.RedisQueueProperties;
-import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
@@ -48,7 +47,7 @@ public class BucketTask extends Thread {
             if (jobs != null && jobs.size() > 0) {
                 for (String jobId : jobs) {
                     if (!StringUtils.isEmpty(jobId)) {
-                        JobMsg job = jobOperationService.getJob(jobId);
+                        JobMessage job = jobOperationService.getJob(jobId);
                         if (null == job) {
                             jobOperationService.removeBucketKey(bucketName, jobId);
                             continue;

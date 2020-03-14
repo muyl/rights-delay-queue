@@ -1,6 +1,6 @@
 package com.yxqy.redis.ready;
 
-import com.yxqy.domain.JobMsg;
+import com.yxqy.domain.JobMessage;
 import com.yxqy.domain.Status;
 import com.yxqy.queue.core.ConsumeQueueProvider;
 import com.yxqy.queue.core.Queue;
@@ -45,7 +45,7 @@ public class RealTimeTask extends Thread {
             if (jobIds != null && jobIds.size() > 0) {
                 for (String jobId : jobIds) {
                     if (!StringUtils.isEmpty(jobId)) {
-                        JobMsg j = jobOperationService.getJob(jobId);
+                        JobMessage j = jobOperationService.getJob(jobId);
                         if (j == null) {
                             this.jobOperationService.removeReadyJob(jobId);
                             LOGGER.warn("任务ID {} 元数据池没有数据", jobId);
@@ -83,7 +83,7 @@ public class RealTimeTask extends Thread {
         }
     }
 
-    private boolean check(JobMsg job) {
+    private boolean check(JobMessage job) {
         long runTime = job.getCreateTime() + job.getDelay(),
                 currentTime = System.currentTimeMillis();
         return runTime <= currentTime;

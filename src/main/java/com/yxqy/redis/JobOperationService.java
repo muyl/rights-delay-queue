@@ -1,6 +1,6 @@
 package com.yxqy.redis;
 
-import com.yxqy.domain.JobMsg;
+import com.yxqy.domain.JobMessage;
 import com.yxqy.domain.Status;
 
 import java.util.List;
@@ -16,14 +16,14 @@ public interface JobOperationService {
      * @param jobId 任务编号
      * @return 任务信息
      */
-    JobMsg getJob(String jobId);
+    JobMessage getJob(String jobId);
 
     /**
      * 添加Job到元数据池
      *
-     * @param jobMsg 任务信息
+     * @param jobMessage 任务信息
      */
-    void addJobToPool(JobMsg jobMsg);
+    void addJobToPool(JobMessage jobMessage);
 
     /**
      * 删除元数据此任务

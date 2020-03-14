@@ -1,6 +1,6 @@
 package com.yxqy.queue.core;
 
-import com.yxqy.domain.JobMsg;
+import com.yxqy.domain.JobMessage;
 import com.yxqy.exception.DelayQueueException;
 import com.yxqy.queue.Lifecycle;
 
@@ -15,7 +15,7 @@ public interface Queue extends Lifecycle {
      * @param job 消息
      * @throws DelayQueueException 异常
      */
-    void push(JobMsg job) throws DelayQueueException;
+    void push(JobMessage job) throws DelayQueueException;
 
     /**
      * 清空任务
@@ -36,5 +36,5 @@ public interface Queue extends Lifecycle {
      * @param jobId 任务消息编号
      * @return 任务信息
      */
-    JobMsg getJob(String jobId);
+    JobMessage getJob(String jobId);
 }

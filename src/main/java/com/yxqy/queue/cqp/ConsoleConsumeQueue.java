@@ -1,7 +1,7 @@
 package com.yxqy.queue.cqp;
 
 import com.yxqy.common.extension.ExtNamed;
-import com.yxqy.domain.JobMsg;
+import com.yxqy.domain.JobMessage;
 import com.yxqy.exception.ConsumeQueueException;
 import com.yxqy.queue.core.ConsumeQueueProvider;
 import com.yxqy.util.JsonUtil;
@@ -14,7 +14,7 @@ public class ConsoleConsumeQueue implements ConsumeQueueProvider {
 
 
     @Override
-    public void consumer(JobMsg job) throws ConsumeQueueException {
+    public void consumer(JobMessage job) throws ConsumeQueueException {
         System.out.println(String.format("invoke topic %s json:%s", job.getTopic(),
                 JsonUtil.convertObjectToJSON(job)));
     }

@@ -1,7 +1,7 @@
 package com.yxqy.redis;
 
 import com.google.common.collect.Lists;
-import com.yxqy.domain.JobMsg;
+import com.yxqy.domain.JobMessage;
 import com.yxqy.domain.Status;
 import com.yxqy.redis.bucket.BucketTask;
 import com.yxqy.redis.support.RedisQueueProperties;
@@ -12,7 +12,6 @@ import lombok.Setter;
 import org.springframework.util.Assert;
 import redis.clients.jedis.Tuple;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -38,14 +37,14 @@ public class JobOperationServiceImpl implements JobOperationService {
     }
 
     @Override
-    public JobMsg getJob(String jobId) {
+    public JobMessage getJob(String jobId) {
         String text = redisSupport.getHashKey(getPoolName(), jobId);
-        return JsonUtil.convertJSONToObject(text, JobMsg.class);
+        return JsonUtil.convertJSONToObject(text, JobMessage.class);
     }
 
     @Override
-    public void addJobToPool(JobMsg jobMsg) {
-        redisSupport.hashPut(getPoolName(), jobMsg.getId(), JsonUtil.convertObjectToJSON(jobMsg));
+    public void addJobToPool(JobMessage jobMessage) {
+        redisSupport.hashPut(getPoolName(), jobMessage.getId(), JsonUtil.convertObjectToJSON(jobMessage));
     }
 
     @Override
@@ -55,7 +54,7 @@ public class JobOperationServiceImpl implements JobOperationService {
 
     @Override
     public void updateJobStatus(String jobId, Status status) {
-        JobMsg msg = getJob(jobId);
+        JobMessage msg = getJob(jobId);
         Assert.notNull(msg, String.format("JobId %s 数据已不存在", jobId));
         msg.setStatus(status.ordinal());
         addJobToPool(msg);

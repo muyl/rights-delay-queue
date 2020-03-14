@@ -1,6 +1,6 @@
 package com.yxqy.redis.event;
 
-import com.yxqy.domain.JobMsg;
+import com.yxqy.domain.JobMessage;
 import com.yxqy.domain.RdbOperation;
 
 /**
@@ -8,21 +8,21 @@ import com.yxqy.domain.RdbOperation;
  */
 public class  RedisJobTraceEvent implements JobEvent {
 
-    private JobMsg       jobMsg    = null;
-    private RdbOperation operation = RdbOperation.UPDATE;
+    private JobMessage   jobMessage = null;
+    private RdbOperation operation  = RdbOperation.UPDATE;
 
-    public RedisJobTraceEvent(JobMsg jobMsg) {
-        this.jobMsg = jobMsg;
+    public RedisJobTraceEvent(JobMessage jobMessage) {
+        this.jobMessage = jobMessage;
     }
 
-    public RedisJobTraceEvent(JobMsg jobMsg, RdbOperation operation) {
-        this.jobMsg = jobMsg;
+    public RedisJobTraceEvent(JobMessage jobMessage, RdbOperation operation) {
+        this.jobMessage = jobMessage;
         this.operation = operation;
     }
 
     @Override
-    public JobMsg getJob() {
-        return jobMsg;
+    public JobMessage getJob() {
+        return jobMessage;
     }
 
     public RdbOperation getOperation() {
