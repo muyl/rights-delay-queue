@@ -1,6 +1,6 @@
-package com.yxqy.config;
+package com.yxqy.common.config;
 
-import com.yxqy.servlet.WebFilterParam;
+import com.yxqy.common.servlet.WebFilterParam;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

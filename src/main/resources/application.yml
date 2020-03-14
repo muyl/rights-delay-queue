@@ -1,0 +1,30 @@
+dlmq:
+  logpath: ../logs
+  registry:
+    enable: false
+    namespace: io-sdmq
+    serverList: 127.0.0.1:2181
+  rqueue:
+    cluster: false
+    name: dq
+    bucketSize: 4
+spring:
+  application:
+    name: 'sdmq'
+    version: '1.0'
+  redis:
+    auth:
+    timeout: 60000
+    database: 11
+    clusterNodes:
+      - 127.0.0.1:7001
+      - 127.0.0.1:7002
+      - 127.0.0.1:7003
+      - 127.0.0.1:7004
+      - 127.0.0.1:7005
+      - 127.0.0.1:7006
+    maxIdle: 300
+    minIdle: 10
+    maxTotal: 200
+    maxWaitMillis: 10000
+    commandTimeout: 10000

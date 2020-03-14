@@ -1,4 +1,4 @@
-package com.yxqy.servlet;
+package com.yxqy.common.servlet;
 
 /**
  * @author 拓仲(牟云龙) on 2020/2/15
