@@ -1,6 +1,5 @@
 package com.yxqy.common.event;
 
-import com.yxqy.common.config.AppEnvContext;
 import com.yxqy.redis.RedisQueueImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
