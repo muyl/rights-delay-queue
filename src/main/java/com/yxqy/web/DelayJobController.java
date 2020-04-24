@@ -2,8 +2,8 @@ package com.yxqy.web;
 
 import com.yxqy.domain.DelayMessage;
 import com.yxqy.domain.JobMessage;
-import com.yxqy.queue.core.Queue;
-import com.yxqy.util.JobIdGenerator;
+import com.yxqy.service.queue.core.Queue;
+import com.yxqy.common.util.JobIdGenerator;
 import org.springframework.http.MediaType;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,10 +28,12 @@ public class DelayJobController {
     public void sendMessage(@RequestBody DelayMessage delayMessage) {
         Assert.notNull(delayMessage.getTopic(), "请求参数topic缺失");
 
-        redisQueue.push(JobMessage.builder()
-                .topic(delayMessage.getTopic())
-                .body(delayMessage.getBody())
-                .id(JobIdGenerator.getStringId()).build());
+        JobMessage job  = new JobMessage();
+        job.setBody(delayMessage.getBody());
+        job.setTopic(delayMessage.getTopic());
+        job.setDelay(delayMessage.getDelay());
+        job.setId(JobIdGenerator.getStringId());
+        redisQueue.push(job);
 
     }
 }

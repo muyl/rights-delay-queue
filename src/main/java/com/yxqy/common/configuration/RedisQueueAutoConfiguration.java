@@ -1,13 +1,13 @@
 package com.yxqy.common.configuration;
 
-import com.yxqy.redis.JobOperationService;
-import com.yxqy.redis.JobOperationServiceImpl;
-import com.yxqy.redis.RedisQueueImpl;
-import com.yxqy.redis.bucket.BucketQueueManager;
-import com.yxqy.redis.ready.ReadyQueueManager;
-import com.yxqy.redis.support.RedisDistributedLock;
-import com.yxqy.redis.support.RedisQueueProperties;
-import com.yxqy.redis.support.RedisSupport;
+import com.yxqy.service.redis.JobOperationService;
+import com.yxqy.service.redis.JobOperationServiceImpl;
+import com.yxqy.service.redis.RedisQueueImpl;
+import com.yxqy.service.redis.bucket.BucketQueueManager;
+import com.yxqy.service.redis.ready.ReadyQueueManager;
+import com.yxqy.service.redis.support.RedisDistributedLock;
+import com.yxqy.service.redis.support.RedisQueueProperties;
+import com.yxqy.service.redis.support.RedisSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

@@ -36,7 +36,7 @@ public class RedisConfig {
         Set<HostAndPort> nodes = new HashSet<>();
         for (String clusterNode : clusterNodes) {
             String[] ipPortPair = clusterNode.split(":");
-            nodes.add(new HostAndPort(ipPortPair[0].trim(), Integer.valueOf(ipPortPair[1].trim())));
+            nodes.add(new HostAndPort(ipPortPair[0].trim(), Integer.parseInt(ipPortPair[1].trim())));
         }
 
         if (!nodes.isEmpty()) {

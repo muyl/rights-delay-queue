@@ -1,0 +1,32 @@
+spring:
+  cloud:
+    zookeeper:
+      connect-string: 127.0.0.1:3181
+  redis:
+    auth:
+    timeout: 60000
+    database: 11
+    clusterNodes:
+      - 127.0.0.1:7000
+      - 127.0.0.1:7001
+      - 127.0.0.1:7002
+      - 127.0.0.1:7003
+      - 127.0.0.1:7004
+      - 127.0.0.1:7005
+    maxIdle: 300
+    minIdle: 10
+    maxTotal: 200
+    maxWaitMillis: 10000
+    commandTimeout: 10000
+  activemq:
+    broker-url: failover:(tcp://localhost:61617)?initialReconnectDelay=10000&maxReconnectAttempts=-1
+    in-memory: true
+    pool:
+      enabled: true
+      max-connections: 20
+activemq:
+  queue:
+    name: test.queue
+server:
+  port: 8002
+

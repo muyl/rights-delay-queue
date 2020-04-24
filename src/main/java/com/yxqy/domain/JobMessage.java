@@ -28,4 +28,5 @@ public class JobMessage implements java.io.Serializable{
     private int    status     = Status.WaitPut.ordinal();
 
 
+
 }

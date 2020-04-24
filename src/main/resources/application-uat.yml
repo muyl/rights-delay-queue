@@ -1,0 +1,23 @@
+spring:
+  cloud:
+    zookeeper:
+      connect-string: 127.0.0.1:2181
+  redis:
+    auth:
+    timeout: 60000
+    database: 11
+    clusterNodes:
+      - 127.0.0.1:7001
+      - 127.0.0.1:7002
+      - 127.0.0.1:7003
+      - 127.0.0.1:7004
+      - 127.0.0.1:7005
+      - 127.0.0.1:7006
+    maxIdle: 300
+    minIdle: 10
+    maxTotal: 200
+    maxWaitMillis: 10000
+    commandTimeout: 10000
+server:
+  port: 8002
+

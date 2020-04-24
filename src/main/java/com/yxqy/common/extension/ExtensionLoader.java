@@ -1,6 +1,5 @@
 package com.yxqy.common.extension;
 
-import com.yxqy.queue.core.ConsumeQueueProvider;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
@@ -78,11 +77,6 @@ public final class ExtensionLoader {
         return null;
     }
 
-    public static void main(String[] args) {
-        System.out.println(ExtensionLoader.getExtension(ConsumeQueueProvider.class));
-        System.out.println(ExtensionLoader.getExtension(ConsumeQueueProvider.class));
-        System.out.println(ExtensionLoader.getExtension(ConsumeQueueProvider.class));
-    }
 
     public static <T> List<T> newExtensionList(Class<T> clazz) {
         ServiceLoader<T> serviceLoader = ServiceLoader.load(clazz);

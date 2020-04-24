@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration>
+
+<configuration debug="false">
+
+	<springProperty scope="context" name="appName" source="spring.application.name"/>
+	<contextName>${appName}</contextName>
+
+	<!-- 日志级别 -->
+	<property name="logLevel" value="INFO"/>
+	<!-- 日志地址 -->
+	<property name="logHome" value="./logs/" scope="context" />
+	<property name="pattern" value="[%level]%date{yyyy-MM-dd HH:mm:ss.SSS}|%X{req.id}|%X{req.userIp}|%X{req.context}|%X{req.contextIp}|${appName}|%X{functionId}|%logger{35}|%m%n" scope="context" />
+
+
+	<!-- JMX监控 -->
+	<jmxConfigurator />
+
+	<!-- 控制台日志 -->
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>${pattern}</pattern>
+		</layout>
+	</appender>
+
+	<!-- 错误及警告日志 -->
+	<appender name="ERROR_WARN"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>WARN</level>
+		</filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${logHome}/%d{yyyy-MM-dd}/error_warn_%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>100MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<encoder>
+			<Pattern>${pattern}</Pattern>
+		</encoder>
+	</appender>
+
+	<appender name="all.log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${logHome}/all.log</File>
+		<encoder charset="UTF-8">
+			<Pattern>${pattern}</Pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${logHome}/%d{yyyy-MM-dd}/all_%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<maxHistory>10</maxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>512MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+	</appender>
+
+
+	<!--================== 第三方logger级别配置 begin ================== -->
+	<!--====== sql log begin ====== -->
+	<logger name="java.sql">
+		<level value="DEBUG" />
+	</logger>
+
+	<logger name="org.mybatis">
+		<level value="ERROR" />
+	</logger>
+
+
+	<!--======= sql log end ======= -->
+
+	<logger name="org.apache">
+		<level value="ERROR" />
+	</logger>
+	<logger name="com.alibaba">
+		<level value="ERROR" />
+	</logger>
+
+	<logger name="com.baidu">
+		<level value="INFO" />
+	</logger>
+
+	<logger name="org.castor">
+		<level value="ERROR" />
+	</logger>
+
+	<logger name="org.exolab.castor">
+		<level value="ERROR" />
+	</logger>
+
+	<logger name="org.springframework">
+		<level value="ERROR" />
+	</logger>
+
+	<logger name="ch.qos.logback">
+		<level value="ERROR" />
+	</logger>
+
+	<logger name="org.hibernate">
+		<level value="ERROR" />
+	</logger>
+
+
+	<!--================== 第三方logger配置 end ================== -->
+	<springProfile name="dev">
+		<root level="${logLevel}">
+			<appender-ref ref="CONSOLE" />
+			<appender-ref ref="ERROR_WARN" />
+			<appender-ref ref="all.log" />
+		</root>
+	</springProfile>
+
+	<springProfile name="uat">
+		<root level="${logLevel}">
+			<appender-ref ref="ERROR_WARN" />
+			<appender-ref ref="all.log" />
+		</root>
+	</springProfile>
+
+	<springProfile name="prd">
+		<root level="info">
+			<appender-ref ref="ERROR_WARN" />
+			<appender-ref ref="all.log" />
+		</root>
+	</springProfile>
+
+</configuration>
