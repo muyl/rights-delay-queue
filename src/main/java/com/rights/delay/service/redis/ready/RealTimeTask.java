@@ -1,6 +1,8 @@
 package com.rights.delay.service.redis.ready;
 
 import com.rights.delay.common.util.DateUtils;
+import com.rights.delay.common.util.NamedUtil;
+import com.rights.delay.common.util.UUIDUtils;
 import com.rights.delay.domain.Status;
 import com.rights.delay.service.queue.core.RealTimeQueueProvider;
 import com.rights.delay.service.queue.Queue;
@@ -27,19 +29,30 @@ public class RealTimeTask extends Thread {
     private RedisQueueProperties properties;
     private JobOperationService jobOperationService;
     private Queue delayQueue;
-    private DistributedLock lock                 = null;
+    private DistributedLock lock = null;
     private RealTimeQueueProvider realTimeQueueProvider = null;
 
     @Override
     public void run() {
-        runInstance();
+        if (properties.isCluster()) {
+            String lockName = NamedUtil.buildLockName(NamedUtil.buildRealTimeName(properties.getPrefix(), properties
+                    .getName(), properties.getReadyName()));
+            String requestId = UUIDUtils.getUUID();
+            try {
+                if (lock.tryLock(lockName,requestId)){
+                    runInstance();
+                }
+            }finally{
+                lock.unlock(lockName);
+            }
+        } else {
+            runInstance();
+        }
+
     }
 
     private void runInstance() {
         try {
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("开始轮询实时队列...%s");
-            }
             //获取ready队列中的一个数据
             List<String> jobIds = jobOperationService.getReadyJob(10);
             if (jobIds != null && jobIds.size() > 0) {
@@ -64,8 +77,7 @@ public class RealTimeTask extends Thread {
                             }
                             if (LOGGER.isInfoEnabled()) {
                                 long runLong = j.getDelay() + j.getCreateTime();
-                                String runDateString = DateUtils.format(new Date(runLong), DateUtils
-                                        .FORMAT_YYYY_MM_DD_HH_MM_SS_SSS);
+                                String runDateString = DateUtils.format(new Date(runLong), DateUtils.FORMAT_YYYY_MM_DD_HH_MM_SS_SSS);
                                 LOGGER.info(String.format("invokeTask %s target time : %s", jobId, runDateString));
                             }
                             realTimeQueueProvider.sendMessage(j);
@@ -84,8 +96,7 @@ public class RealTimeTask extends Thread {
     }
 
     private boolean check(JobMessage job) {
-        long runTime = job.getCreateTime() + job.getDelay(),
-                currentTime = System.currentTimeMillis();
+        long runTime = job.getCreateTime() + job.getDelay(), currentTime = System.currentTimeMillis();
         return runTime <= currentTime;
     }
 

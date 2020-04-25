@@ -6,9 +6,13 @@ package com.rights.delay.service.redis.support;
 public interface DistributedLock {
     boolean tryLock(String key);
 
-    boolean tryLock(String key, long timeout);
+    boolean tryLock(String key, int timeout);
 
-    boolean lock(String key);
+    boolean tryLock(String key, String requestId);
 
-    void unlock(String key);
+    boolean tryLock(String key,String requestId, int timeout);
+
+    boolean unlock(String key);
+
+    boolean unLock(String mutex, String requestId);
 }

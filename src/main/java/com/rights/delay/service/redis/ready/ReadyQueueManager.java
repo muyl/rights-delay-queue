@@ -33,6 +33,11 @@ public class ReadyQueueManager implements Lifecycle {
 
 
     @Override
+    public void init() {
+
+    }
+
+    @Override
     public void start() {
         if (isRuning.compareAndSet(false, true)) {
             executor = new ScheduledThreadPoolExecutor(1);

@@ -13,14 +13,15 @@ import lombok.NoArgsConstructor;
  * @author shanks on 2019-09-26
  */
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Builder
 public class ReplyVo<T> {
 
     private String code;
     private String message;
     private T      data;
+
+    public ReplyVo() {
+    }
 
     /**
      * Reply vo
@@ -52,6 +53,12 @@ public class ReplyVo<T> {
     public ReplyVo(ResultEnum resultEnum, T data) {
         this.code = resultEnum.getCode();
         this.message = resultEnum.getMessage();
+        this.data = data;
+    }
+
+    public ReplyVo(String code, String message, T data) {
+        this.code = code;
+        this.message = message;
         this.data = data;
     }
 }

@@ -85,6 +85,11 @@ public class RedisQueueImpl implements Queue, java.io.Closeable {
     }
 
     @Override
+    public void init() {
+
+    }
+
+    @Override
     public void start() {
         if (isRunning.compareAndSet(false, true)) {
             bucketQueueManager.start();

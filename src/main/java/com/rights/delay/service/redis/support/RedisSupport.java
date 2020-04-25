@@ -86,4 +86,13 @@ public class RedisSupport {
     public boolean lrem(String key, String jobId) {
         return template.lrem(key, -1, jobId) > 0;
     }
+
+
+    public String set(String mutex, String requestId, String nx, String ex, int defaultTimeOut) {
+        return template.set(mutex, requestId, nx, ex, defaultTimeOut);
+    }
+
+    public Object eval(String script, List<String> singletonList, List<String> singletonList1) {
+        return template.eval(script,singletonList,singletonList1);
+    }
 }

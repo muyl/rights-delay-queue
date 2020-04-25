@@ -36,6 +36,11 @@ public class BucketQueueManager implements Lifecycle {
     public boolean daemon = true;
 
     @Override
+    public void init() {
+
+    }
+
+    @Override
     public void start() {
         int bucketSize = checkBucketNum(properties.getBucketSize());
         if (isRunning.compareAndSet(false, true)) {

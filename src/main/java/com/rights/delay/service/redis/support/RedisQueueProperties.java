@@ -12,15 +12,17 @@ public class RedisQueueProperties {
 
 
     private String name;
-    private String prefix     = "io.sdmq";
+    private String prefix = "io.sdmq";
     private String originPool = "pools";
-    private String readyName  = "ready";
-    private int    bucketSize = 3;
+    private String readyName = "ready";
+    private int bucketSize = 3;
 
     /** buck轮询时间 */
-    private long buckRoundRobinTime  = 300;
+    private long buckRoundRobinTime = 300;
     /** ready轮询时间 */
     private long readyRoundRobinTime = 200;
+
+    private boolean cluster = false;
 
 
     public String getName() {
@@ -80,5 +82,13 @@ public class RedisQueueProperties {
 
     public void setReadyRoundRobinTime(long readyRoundRobinTime) {
         this.readyRoundRobinTime = readyRoundRobinTime;
+    }
+
+    public boolean isCluster() {
+        return cluster;
+    }
+
+    public void setCluster(boolean cluster) {
+        this.cluster = cluster;
     }
 }
