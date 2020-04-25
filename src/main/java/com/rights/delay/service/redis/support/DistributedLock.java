@@ -12,7 +12,7 @@ public interface DistributedLock {
 
     boolean tryLock(String key,String requestId, int timeout);
 
-    boolean unlock(String key);
+    boolean unLock(String key);
 
     boolean unLock(String mutex, String requestId);
 }
