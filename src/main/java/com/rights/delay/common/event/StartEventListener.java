@@ -21,7 +21,7 @@ public class StartEventListener implements ApplicationListener<ContextRefreshedE
     public void onApplicationEvent(ContextRefreshedEvent event) {
         ApplicationContext ctx = event.getApplicationContext();
         if (ctx != null) {
-            String regEnable = AppEnvContext.getProperty("dlmq.registry.enable", "false");
+            String regEnable = AppEnvContext.getProperty("rdmq.registry.enable", "false");
             RedisQueueImpl redisQueue = ctx.getBean(RedisQueueImpl.class);
             if (!redisQueue.isRunning() && !Boolean.parseBoolean(regEnable)) {
                 LOGGER.info("starting Queue StandAlone Model ...");

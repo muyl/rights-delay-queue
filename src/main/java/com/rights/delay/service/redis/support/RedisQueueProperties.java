@@ -8,7 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = RedisQueueProperties.REDIS_QUEUE_PREFIX)
 public class RedisQueueProperties {
 
-    public static final String REDIS_QUEUE_PREFIX = "dlmq.rqueue";
+    public static final String REDIS_QUEUE_PREFIX = "rdmq.rqueue";
 
 
     private String name;

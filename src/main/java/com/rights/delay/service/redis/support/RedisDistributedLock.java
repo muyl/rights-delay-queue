@@ -3,6 +3,8 @@ package com.rights.delay.service.redis.support;
 import java.util.Collections;
 
 /**
+ * Redis distributed lock
+ *
  * @author 拓仲 on 2020/3/11
  */
 public class RedisDistributedLock implements DistributedLock {
@@ -13,6 +15,11 @@ public class RedisDistributedLock implements DistributedLock {
 
     private RedisSupport redisSupport;
 
+    /**
+     * Redis distributed lock
+     *
+     * @param redisSupport redis support
+     */
     public RedisDistributedLock(RedisSupport redisSupport) {
         this.redisSupport = redisSupport;
     }
