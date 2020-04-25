@@ -19,11 +19,10 @@ public class BucketQueueManager implements Lifecycle {
 
     public static final Logger LOGGER = LoggerFactory.getLogger(BucketQueueManager.class);
 
-    public static final String THREAD_NAME = "ccmq-delay-queue-%s";
-
     private volatile AtomicBoolean isRunning = new AtomicBoolean(false);
 
     private ScheduledThreadPoolExecutor executor;
+
 
     @Setter
     private RedisQueueProperties properties;
@@ -44,20 +43,18 @@ public class BucketQueueManager implements Lifecycle {
     public void start() {
         int bucketSize = checkBucketNum(properties.getBucketSize());
         if (isRunning.compareAndSet(false, true)) {
-            executor = new ScheduledThreadPoolExecutor(bucketSize);
+            ThreadFactory threadFactory = new BucketThreadFactory();
+            executor = new ScheduledThreadPoolExecutor(bucketSize, threadFactory);
             for (int i = 1; i <= bucketSize; i++) {
                 String bName = NamedUtil.buildBucketName(properties.getPrefix(), properties.getName(), i);
                 BucketTask task = new BucketTask(bName);
                 task.setJobOperationService(jobOperationService);
-                task.setPoolName(NamedUtil.buildPoolName(properties.getPrefix(), properties.getName(), properties
-                        .getOriginPool()));
-                task.setReadyName(NamedUtil.buildPoolName(properties.getPrefix(), properties.getName(), properties
-                        .getReadyName()));
+                task.setPoolName(NamedUtil.buildPoolName(properties.getPrefix(), properties.getName(), properties.getOriginPool()));
+                task.setReadyName(NamedUtil.buildPoolName(properties.getPrefix(), properties.getName(), properties.getReadyName()));
                 task.setProperties(properties);
                 task.setLock(lock);
                 task.setDaemon(daemon);
-                this.executor.scheduleAtFixedRate(task, 5,
-                        10, TimeUnit.SECONDS);
+                this.executor.scheduleAtFixedRate(task, 5, 10, TimeUnit.SECONDS);
             }
         }
     }

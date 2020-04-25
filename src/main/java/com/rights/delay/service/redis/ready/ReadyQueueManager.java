@@ -19,15 +19,12 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class ReadyQueueManager implements Lifecycle {
 
     public static final Logger LOGGER = LoggerFactory.getLogger(ReadyQueueManager.class);
-
-    public static final String THREAD_NAME = "sdmq-ready-queue-%s";
     public boolean daemon = true;
     private volatile AtomicBoolean isRuning = new AtomicBoolean(false);
     private RedisQueueProperties properties;
     private ScheduledThreadPoolExecutor executor;
     private JobOperationService jobOperationService;
     private Queue delayQueue;
-    private String threadName;
     private DistributedLock lock = null;
     private RealTimeQueueProvider realTimeQueueProvider;
 
@@ -40,8 +37,7 @@ public class ReadyQueueManager implements Lifecycle {
     @Override
     public void start() {
         if (isRuning.compareAndSet(false, true)) {
-            threadName = String.format(THREAD_NAME, 1);
-            ReadyThreadFactory threadFactory = new ReadyThreadFactory(threadName);
+            ReadyThreadFactory threadFactory = new ReadyThreadFactory();
             executor = new ScheduledThreadPoolExecutor(1, threadFactory);
             RealTimeTask task = new RealTimeTask();
             task.setProperties(properties);
@@ -51,7 +47,6 @@ public class ReadyQueueManager implements Lifecycle {
             task.setRealTimeQueueProvider(realTimeQueueProvider);
             task.setDaemon(daemon);
             executor.scheduleAtFixedRate(task, 3000, properties.getReadyRoundRobinTime(), TimeUnit.MILLISECONDS);
-            LOGGER.info(String.format("Starting Ready Thead %s ....", threadName));
         }
     }
 
@@ -60,7 +55,6 @@ public class ReadyQueueManager implements Lifecycle {
         if (isRuning.compareAndSet(true, false)) {
             if (executor != null) {
                 executor.shutdown();
-                LOGGER.info(String.format("stoping timer %s .....", threadName));
             }
         }
     }
