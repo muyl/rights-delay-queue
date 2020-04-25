@@ -10,7 +10,7 @@ import java.util.Objects;
 @ConfigurationProperties(prefix = RegistryProperties.SDMQ_REGISTRY_PREFIX)
 public class RegistryProperties {
 
-    public static final String SDMQ_REGISTRY_PREFIX = "sdmq.registry";
+    public static final String SDMQ_REGISTRY_PREFIX = "dlmq.registry";
 
 
     private String enable = Objects.toString(Boolean.FALSE);

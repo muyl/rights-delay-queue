@@ -1,5 +1,6 @@
 package com.rights.delay.common.event;
 
+import com.rights.delay.common.config.AppEnvContext;
 import com.rights.delay.service.redis.RedisQueueImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,8 +21,9 @@ public class StartEventListener implements ApplicationListener<ContextRefreshedE
     public void onApplicationEvent(ContextRefreshedEvent event) {
         ApplicationContext ctx = event.getApplicationContext();
         if (ctx != null) {
+            String regEnable = AppEnvContext.getProperty("dlmq.registry.enable", "false");
             RedisQueueImpl redisQueue = ctx.getBean(RedisQueueImpl.class);
-            if (!redisQueue.isRunning()) {
+            if (!redisQueue.isRunning() && !Boolean.parseBoolean(regEnable)) {
                 LOGGER.info("starting Queue StandAlone Model ...");
                 redisQueue.start();
             }

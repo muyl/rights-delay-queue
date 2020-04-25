@@ -16,6 +16,10 @@ logging:
 
 
 dlmq:
+  registry:
+    enable: true
+    namespace: io-sdmq
+    serverList: 127.0.0.1:3181
   rqueue:
     cluster: false
     name: dq
