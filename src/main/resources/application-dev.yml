@@ -25,5 +25,5 @@ activemq:
   queue:
     name: test.queue
 server:
-  port: 8002
+  port: 8005
 

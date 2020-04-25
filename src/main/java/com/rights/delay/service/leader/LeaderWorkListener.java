@@ -1,5 +1,6 @@
 package com.rights.delay.service.leader;
 
+import com.rights.delay.common.util.IpUtils;
 import com.rights.delay.service.queue.Queue;
 import org.apache.curator.framework.recipes.leader.LeaderLatchListener;
 import org.slf4j.Logger;
@@ -15,13 +16,13 @@ public class LeaderWorkListener implements LeaderLatchListener {
 
     @Override
     public void isLeader() {
-        LOGGER.warn("is starting work!");
+        LOGGER.warn("Server {}, starting work!", IpUtils.getHostAndIp());
         queue.start();
     }
 
     @Override
     public void notLeader() {
-        LOGGER.warn("is stoping work!");
+        LOGGER.warn("Server {},stop work!", IpUtils.getHostAndIp());
         queue.stop();
     }
 

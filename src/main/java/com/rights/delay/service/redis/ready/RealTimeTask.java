@@ -35,15 +35,14 @@ public class RealTimeTask extends Thread {
     @Override
     public void run() {
         if (properties.isCluster()) {
-            String lockName = NamedUtil.buildLockName(NamedUtil.buildRealTimeName(properties.getPrefix(), properties
-                    .getName(), properties.getReadyName()));
+            String lockName = NamedUtil.buildLockName(NamedUtil.buildRealTimeName(properties.getPrefix(), properties.getName(), properties.getReadyName()));
             String requestId = UUIDUtils.getUUID();
             try {
-                if (lock.tryLock(lockName,requestId)){
+                if (lock.tryLock(lockName, requestId)) {
                     runInstance();
                 }
-            }finally{
-                lock.unlock(lockName);
+            } finally {
+                lock.unLock(lockName, requestId);
             }
         } else {
             runInstance();

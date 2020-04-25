@@ -40,7 +40,9 @@ public class ReadyQueueManager implements Lifecycle {
     @Override
     public void start() {
         if (isRuning.compareAndSet(false, true)) {
-            executor = new ScheduledThreadPoolExecutor(1);
+            threadName = String.format(THREAD_NAME, 1);
+            ReadyThreadFactory threadFactory = new ReadyThreadFactory(threadName);
+            executor = new ScheduledThreadPoolExecutor(1, threadFactory);
             RealTimeTask task = new RealTimeTask();
             task.setProperties(properties);
             task.setJobOperationService(jobOperationService);

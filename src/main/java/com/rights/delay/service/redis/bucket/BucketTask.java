@@ -1,5 +1,7 @@
 package com.rights.delay.service.redis.bucket;
 
+import com.rights.delay.common.util.NamedUtil;
+import com.rights.delay.common.util.UUIDUtils;
 import com.rights.delay.domain.Status;
 import com.rights.delay.service.redis.JobOperationService;
 import com.rights.delay.service.redis.event.JobEventBus;
@@ -36,7 +38,19 @@ public class BucketTask extends Thread {
 
     @Override
     public void run() {
-        runInstance();
+        if (properties.isCluster()) {
+            String lockName = NamedUtil.buildLockName(bucketName);
+            String requestId = UUIDUtils.getUUID();
+            try {
+                if (lock.tryLock(lockName, requestId)) {
+                    runInstance();
+                }
+            } finally {
+                lock.unLock(lockName, requestId);
+            }
+        } else {
+            runInstance();
+        }
     }
 
 

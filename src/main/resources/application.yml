@@ -21,6 +21,6 @@ dlmq:
     namespace: io-sdmq
     serverList: 127.0.0.1:3181
   rqueue:
-    cluster: false
+    cluster: true
     name: dq
     bucketSize: 4
