@@ -5,6 +5,9 @@ package com.rights.delay.service.queue;
  */
 public interface Lifecycle {
 
+    /**
+     * 初始化
+     */
     void init();
     /**
      * 启动
