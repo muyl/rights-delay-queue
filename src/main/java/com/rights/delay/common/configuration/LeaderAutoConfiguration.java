@@ -21,19 +21,27 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 
 /**
- * Created by Xs.Tao on 2017/7/28.
+ *
+ * @author Xs.Tao
+ * @date 2017/7/28
  */
 @Configuration
 @EnableConfigurationProperties(RegistryProperties.class)
 @ConditionalOnProperty(prefix = RegistryProperties.SDMQ_REGISTRY_PREFIX, value = "enable", havingValue = "true")
 @ConditionalOnClass(value = {ZooKeeperServer.class, CuratorFrameworkFactory.class})
-@Order(Ordered.LOWEST_PRECEDENCE + 50)
+@Order(value = Ordered.LOWEST_PRECEDENCE + 50)
 public class LeaderAutoConfiguration {
 
     @Autowired
     private RegistryProperties registryProperties;
 
 
+    /**
+     * Leader latch listener leader latch listener
+     *
+     * @param redisQueueImpl redis queue
+     * @return the leader latch listener
+     */
     @Bean
     @Autowired
     @ConditionalOnMissingBean
@@ -43,6 +51,12 @@ public class LeaderAutoConfiguration {
         return listener;
     }
 
+    /**
+     * Leader manager leader manager
+     *
+     * @param leaderLatchListener leader latch listener
+     * @return the leader manager
+     */
     @Bean(name = "simpleLeaderManager", initMethod = "init", destroyMethod = "stop")
     @Autowired
     @ConditionalOnMissingBean
