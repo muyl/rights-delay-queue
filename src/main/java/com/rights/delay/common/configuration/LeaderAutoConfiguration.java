@@ -21,9 +21,10 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 
 /**
+ * Leader auto configuration
  *
  * @author Xs.Tao
- * @date 2017/7/28
+ * @date 2017 /7/28
  */
 @Configuration
 @EnableConfigurationProperties(RegistryProperties.class)

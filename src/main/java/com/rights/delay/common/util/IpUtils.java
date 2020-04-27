@@ -6,6 +6,9 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.Enumeration;
 
+/**
+ * Ip utils
+ */
 public final class IpUtils {
 
     /**
@@ -20,11 +23,10 @@ public final class IpUtils {
      * 获取本机IP地址.
      *
      * <p>
-     * 有限获取外网IP地址.
-     * 也有可能是链接着路由器的最终IP地址.
+     * 有限获取外网IP地址. 也有可能是链接着路由器的最终IP地址.
      * </p>
      *
-     * @return 本机IP地址
+     * @return 本机IP地址 ip
      */
     public static String getIp() {
         if (null != cachedIpAddress) {
@@ -73,7 +75,7 @@ public final class IpUtils {
     /**
      * 获取本机Host名称.
      *
-     * @return 本机Host名称
+     * @return 本机Host名称 host name
      */
     public static String getHostName() {
         try {
@@ -83,6 +85,11 @@ public final class IpUtils {
         }
     }
 
+    /**
+     * Gets host and ip *
+     *
+     * @return the host and ip
+     */
     public static String getHostAndIp() {
         String name = "";
         try {

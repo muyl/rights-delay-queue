@@ -20,10 +20,15 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * Real time task
+ *
  * @author 拓仲 on 2020/3/11
  */
 public class RealTimeTask extends Thread {
 
+    /**
+     * LOGGER
+     */
     public static final Logger LOGGER = LoggerFactory.getLogger(RealTimeTask.class);
 
     private RedisQueueProperties properties;
@@ -100,25 +105,47 @@ public class RealTimeTask extends Thread {
     }
 
 
+    /**
+     * Sets properties *
+     *
+     * @param properties properties
+     */
     public void setProperties(RedisQueueProperties properties) {
         this.properties = properties;
     }
 
+    /**
+     * Sets job operation service *
+     *
+     * @param jobOperationService job operation service
+     */
     public void setJobOperationService(JobOperationService jobOperationService) {
         this.jobOperationService = jobOperationService;
     }
 
     /**
      * 注入队列操作对象 便于时间没有到触发条件下 执行重新发送
+     *
+     * @param delayQueue delay queue
      */
     public void setDelayQueue(Queue delayQueue) {
         this.delayQueue = delayQueue;
     }
 
+    /**
+     * Sets lock *
+     *
+     * @param lock lock
+     */
     public void setLock(DistributedLock lock) {
         this.lock = lock;
     }
 
+    /**
+     * Sets real time queue provider *
+     *
+     * @param realTimeQueueProvider real time queue provider
+     */
     public void setRealTimeQueueProvider(RealTimeQueueProvider realTimeQueueProvider) {
         this.realTimeQueueProvider = realTimeQueueProvider;
     }

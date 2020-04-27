@@ -1,13 +1,7 @@
 package com.rights.delay.common.constant;
 
 /**
- * 系统返回消息码
- * 区段含义：
- * 第1位（固定x标识，没有特殊含义）
- * 第2位（系统）
- * 第3-4位（功能模块）
- * 第5-8位（错误代码，依次顺延）
- * 例如：X1010001
+ * 系统返回消息码 区段含义： 第1位（固定x标识，没有特殊含义） 第2位（系统） 第3-4位（功能模块） 第5-8位（错误代码，依次顺延） 例如：X1010001
  *
  * @author shanks
  * @since 2019 -09-20  17:51
@@ -63,16 +57,40 @@ public enum ResultEnum {
      * Http message not readable exception result enum
      */
     HTTP_MESSAGE_NOT_READABLE_EXCEPTION("500305", "HttpMessageNotReadableException"),
+    /**
+     * Missing servlet request parameter exception result enum
+     */
     MISSING_SERVLET_REQUEST_PARAMETER_EXCEPTION("500306", "MissingServletRequestParameterException"),
     //全局参数结束
 
+    /**
+     * Request param empty result enum
+     */
     REQUEST_PARAM_EMPTY("400101", "参数错误"),
 
+    /**
+     * Add order acty message miss result enum
+     */
     ADD_ORDER_ACTY_MESSAGE_MISS("801001","活动信息不存在"),
+    /**
+     * Add order acty life miss result enum
+     */
     ADD_ORDER_ACTY_LIFE_MISS("801002","活动兑换频率为空"),
+    /**
+     * Add order acty status down result enum
+     */
     ADD_ORDER_ACTY_STATUS_DOWN("801003","活动已结束"),
+    /**
+     * Add order acty status up result enum
+     */
     ADD_ORDER_ACTY_STATUS_UP("801004","活动未上架"),
+    /**
+     * Add order acty status start result enum
+     */
     ADD_ORDER_ACTY_STATUS_START("801005","活动未开始"),
+    /**
+     * Add order acty status end result enum
+     */
     ADD_ORDER_ACTY_STATUS_END("801006","活动已结束"),
     ;
 

@@ -5,12 +5,24 @@ package com.rights.delay.common.util;
  */
 public final class BlockUtils {
 
+    /**
+     * DEF_SLEEP_TIMES
+     */
     public static final long DEF_SLEEP_TIMES = 100L;
 
+    /**
+     * Waiting short time
+     */
     public static void waitingShortTime() {
         sleep(DEF_SLEEP_TIMES);
     }
 
+    /**
+     * Sleep *
+     *
+     * @param millis millis
+     * @param isInterrupt is interrupt
+     */
     public static void sleep(final long millis, final boolean isInterrupt) {
         try {
             Thread.sleep(millis);
@@ -22,6 +34,11 @@ public final class BlockUtils {
         }
     }
 
+    /**
+     * Sleep *
+     *
+     * @param millis millis
+     */
     public static void sleep(final long millis) {
         sleep(millis, false);
     }

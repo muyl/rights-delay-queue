@@ -10,6 +10,9 @@ import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
 import org.springframework.util.StringUtils;
 
+/**
+ * App env context
+ */
 @Configuration
 @Order(Ordered.HIGHEST_PRECEDENCE - 50)
 public class AppEnvContext implements EnvironmentAware, ApplicationContextAware {
@@ -17,11 +20,24 @@ public class AppEnvContext implements EnvironmentAware, ApplicationContextAware 
     private static Environment env;
     private static ApplicationContext ctx;
 
+    /**
+     * Gets property *
+     *
+     * @param key key
+     * @return the property
+     */
     public static String getProperty(String key) {
 
         return env.getProperty(key);
     }
 
+    /**
+     * Gets property *
+     *
+     * @param key key
+     * @param defaultValue default value
+     * @return the property
+     */
     public static String getProperty(String key, String defaultValue) {
 
         String v = getProperty(key);
@@ -29,10 +45,20 @@ public class AppEnvContext implements EnvironmentAware, ApplicationContextAware 
     }
 
 
+    /**
+     * Gets env *
+     *
+     * @return the env
+     */
     public static Environment getEnv() {
         return env;
     }
 
+    /**
+     * Gets ctx *
+     *
+     * @return the ctx
+     */
     public static ApplicationContext getCtx() {
         return ctx;
     }

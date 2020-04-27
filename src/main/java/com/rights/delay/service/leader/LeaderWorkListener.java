@@ -11,6 +11,9 @@ import org.slf4j.LoggerFactory;
  */
 public class LeaderWorkListener implements LeaderLatchListener {
 
+    /**
+     * LOGGER
+     */
     public static final Logger LOGGER = LoggerFactory.getLogger(LeaderWorkListener.class);
     private Queue queue;
 
@@ -26,6 +29,11 @@ public class LeaderWorkListener implements LeaderLatchListener {
         queue.stop();
     }
 
+    /**
+     * Sets queue *
+     *
+     * @param queue queue
+     */
     public void setQueue(Queue queue) {
         this.queue = queue;
     }

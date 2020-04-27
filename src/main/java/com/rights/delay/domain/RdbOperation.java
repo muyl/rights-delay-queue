@@ -1,6 +1,20 @@
 package com.rights.delay.domain;
 
+/**
+ * Rdb operation
+ */
 public enum RdbOperation {
 
-    INSERT, UPDATE, DELETE
+    /**
+     * Insert rdb operation
+     */
+    INSERT,
+    /**
+     * Update rdb operation
+     */
+    UPDATE,
+    /**
+     * Delete rdb operation
+     */
+    DELETE
 }

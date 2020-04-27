@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 /**
+ * Delay job controller
+ *
  * @author 拓仲 on 2020/3/14
  */
 @RestController
@@ -23,6 +25,11 @@ public class DelayJobController {
     @Resource(name = "redisQueueImpl")
     private Queue redisQueue;
 
+    /**
+     * Send message *
+     *
+     * @param delayMessage delay message
+     */
     @RequestMapping(value = "/sendMessage.json", method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public void sendMessage(@RequestBody DelayMessage delayMessage) {

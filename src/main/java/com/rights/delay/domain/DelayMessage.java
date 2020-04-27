@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
+ * Delay message
+ *
  * @author 拓仲 on 2020/3/14
  */
 @Data

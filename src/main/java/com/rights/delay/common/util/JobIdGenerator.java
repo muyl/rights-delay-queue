@@ -5,11 +5,22 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
 /**
+ * Job id generator
+ *
  * @author 拓仲 on 2020/3/14
  */
 public class JobIdGenerator {
+    /**
+     * LOGGER
+     */
     public static final Logger LOGGER = LoggerFactory.getLogger(JobIdGenerator.class);
+    /**
+     * DATACENTER
+     */
     public static final int DATACENTER = 2;
+    /**
+     * DEFAULT_MACHINED
+     */
     public static final int DEFAULT_MACHINED = 1;
     private static SnowFlake snowFlake = null;
 
@@ -32,10 +43,20 @@ public class JobIdGenerator {
         return DEFAULT_MACHINED;
     }
 
+    /**
+     * Gets long id *
+     *
+     * @return the long id
+     */
     public static long getLongId() {
         return snowFlake.nextId();
     }
 
+    /**
+     * Gets string id *
+     *
+     * @return the string id
+     */
     public static String getStringId() {
         return String.valueOf(snowFlake.nextId());
     }

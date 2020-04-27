@@ -6,6 +6,8 @@ import com.rights.delay.service.queue.core.RealTimeQueueProvider;
 import com.rights.delay.common.util.JsonUtil;
 
 /**
+ * Real time queue consumer
+ *
  * @author 拓仲 on 2020/3/11
  */
 public class RealTimeQueueConsumer implements RealTimeQueueProvider {

@@ -9,6 +9,8 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Configuration;
 
 /**
+ * Failed event listener
+ *
  * @author 拓仲 on 2020/3/10
  */
 @Configuration

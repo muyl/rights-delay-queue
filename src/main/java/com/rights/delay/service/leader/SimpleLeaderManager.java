@@ -21,6 +21,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 public class SimpleLeaderManager implements LeaderManager {
 
+    /**
+     * LOGGER
+     */
     public static final Logger LOGGER = LoggerFactory.getLogger(SimpleLeaderManager.class);
 
     private LeaderLatch leaderLatch;
@@ -90,10 +93,20 @@ public class SimpleLeaderManager implements LeaderManager {
         return leaderLatch.hasLeadership();
     }
 
+    /**
+     * Sets properties *
+     *
+     * @param properties properties
+     */
     public void setProperties(RegistryProperties properties) {
         this.properties = properties;
     }
 
+    /**
+     * Add listener *
+     *
+     * @param leaderLatchListener leader latch listener
+     */
     public void addListener(LeaderLatchListener leaderLatchListener) {
         if (!listeners.contains(leaderLatchListener)) {
             listeners.add(leaderLatchListener);
@@ -101,6 +114,11 @@ public class SimpleLeaderManager implements LeaderManager {
 
     }
 
+    /**
+     * Sets server name *
+     *
+     * @param serverName server name
+     */
     public void setServerName(String serverName) {
         this.serverName = serverName;
     }

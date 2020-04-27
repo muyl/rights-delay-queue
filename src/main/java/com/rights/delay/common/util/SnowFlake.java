@@ -1,5 +1,8 @@
 package com.rights.delay.common.util;
 
+/**
+ * Snow flake
+ */
 public class SnowFlake {
 
     /**
@@ -33,6 +36,12 @@ public class SnowFlake {
     private long sequence = 0L; //序列号
     private long lastStmp = -1L;//上一次时间戳
 
+    /**
+     * Snow flake
+     *
+     * @param datacenterId datacenter id
+     * @param machineId machine id
+     */
     public SnowFlake(long datacenterId, long machineId) {
         if (datacenterId > MAX_DATACENTER_NUM || datacenterId < 0) {
             throw new IllegalArgumentException("datacenterId can't be greater than MAX_DATACENTER_NUM or less than 0");
@@ -46,6 +55,8 @@ public class SnowFlake {
 
     /**
      * 产生下一个ID
+     *
+     * @return the long
      */
     public synchronized long nextId() {
         long currStmp = getNewstmp();

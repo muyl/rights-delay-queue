@@ -13,10 +13,15 @@ import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
+ * Bucket queue manager
+ *
  * @author 拓仲 on 2020/3/10
  */
 public class BucketQueueManager implements Lifecycle {
 
+    /**
+     * LOGGER
+     */
     public static final Logger LOGGER = LoggerFactory.getLogger(BucketQueueManager.class);
 
     private volatile AtomicBoolean isRunning = new AtomicBoolean(false);

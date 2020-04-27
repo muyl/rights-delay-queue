@@ -7,6 +7,8 @@ import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
 /**
+ * Message consumer
+ *
  * @author 拓仲 on 2020/3/29
  */
 @Component
@@ -14,7 +16,11 @@ public class MessageConsumer {
     private static final Logger logger = LoggerFactory.getLogger(MessageConsumer.class);
 
 
-
+    /**
+     * Receive queue *
+     *
+     * @param text text
+     */
     @JmsListener(destination = "test.queue",containerFactory = "jmsListenerQueueContainer")
     public void receiveQueue(String text) {
         logger.info("Consumer收到的报文为:" + text);

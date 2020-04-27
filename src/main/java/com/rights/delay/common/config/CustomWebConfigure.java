@@ -9,11 +9,18 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
+ * Custom web configure
+ *
  * @author 拓仲 on 2020/3/15
  */
 @Configuration
 public class CustomWebConfigure implements WebMvcConfigurer {
 
+    /**
+     * Custom converters http message converters
+     *
+     * @return the http message converters
+     */
     @Bean
     public HttpMessageConverters customConverters(){
         return new HttpMessageConverters(new FastJsonHttpMessageConverter());

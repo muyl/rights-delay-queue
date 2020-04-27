@@ -10,11 +10,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.ContextRefreshedEvent;
 
 /**
+ * Start event listener
+ *
  * @author 拓仲 on 2020/3/10
  */
 @Configuration
 public class StartEventListener implements ApplicationListener<ContextRefreshedEvent> {
 
+    /**
+     * LOGGER
+     */
     public static final Logger LOGGER = LoggerFactory.getLogger(StartEventListener.class);
 
     @Override

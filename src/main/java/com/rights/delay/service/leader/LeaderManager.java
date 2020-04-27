@@ -8,6 +8,11 @@ import com.rights.delay.service.queue.Lifecycle;
  */
 public interface LeaderManager extends Lifecycle {
 
+    /**
+     * Is leader boolean
+     *
+     * @return the boolean
+     */
     boolean isLeader();
 
 

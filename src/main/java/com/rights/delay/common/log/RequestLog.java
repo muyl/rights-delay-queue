@@ -11,26 +11,49 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
+ * Request log
+ *
  * @author 拓仲 on 2020/3/31
  */
 public class RequestLog implements Serializable {
 
+    /**
+     * PASSTHROUGH_LOG
+     */
     public static final String PASSTHROUGH_LOG = "REQ-PASSTHROUGH-LOG";
     /**
      * 请求流水
      */
     public static final String REQ_ID = "req.id";
 
+    /**
+     * REQ_USERIP
+     */
     public static final String REQ_USERIP = "req.userIp";
+    /**
+     * REQ_CONTEXT
+     */
     //请求应用的context
     public static final String REQ_CONTEXT = "req.context";
+    /**
+     * REQ_CONTEXTIP
+     */
     //请求应用的context
     public static final String REQ_CONTEXTIP = "req.contextIp";
 
+    /**
+     * REQ_URI
+     */
     public static final String REQ_URI = "req.requestURI";
+    /**
+     * REQ_QUERYSTRING
+     */
     public static final String REQ_QUERYSTRING = "req.queryString";
 
 
+    /**
+     * REQ_REFERRER
+     */
     public static final String REQ_REFERRER = "req.referrer";
 
     private static String contextIp = "";
@@ -43,6 +66,11 @@ public class RequestLog implements Serializable {
         contextIp = "127.0.0.1";
     }
 
+    /**
+     * Gets log str *
+     *
+     * @return the log str
+     */
     public static String getLogStr() {
         StringBuffer sb = new StringBuffer();
 
@@ -60,6 +88,11 @@ public class RequestLog implements Serializable {
         return sb.toString();
     }
 
+    /**
+     * Sets mdc log *
+     *
+     * @param log log
+     */
     public static void setMDCLog(String log) {
         if (StringUtils.isNotBlank(log)) {
             List<String> logList = Splitter.on("#").splitToList(log);
@@ -82,6 +115,12 @@ public class RequestLog implements Serializable {
 
     }
 
+    /**
+     * Put request id string
+     *
+     * @param text text
+     * @return the string
+     */
     public static String putRequestId(String text) {
         if (StringUtils.isEmpty(text)) {
             return UUIDUtils.getUUID();
@@ -99,6 +138,9 @@ public class RequestLog implements Serializable {
         MDC.put(REQ_REFERRER, "");
     }
 
+    /**
+     * Clear mdc log
+     */
     public static void clearMDCLog() {
         MDC.clear();
     }
@@ -106,7 +148,7 @@ public class RequestLog implements Serializable {
     /**
      * 获取本机应用名称
      *
-     * @return
+     * @return context
      */
     public static String getContext() {
         return contextName;
@@ -115,7 +157,7 @@ public class RequestLog implements Serializable {
     /**
      * 获取本机应用IP
      *
-     * @return
+     * @return context ip
      */
     public static String getContextIp() {
         return contextIp;

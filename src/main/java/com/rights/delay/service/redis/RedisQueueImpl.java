@@ -21,9 +21,14 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
+ * Redis queue
+ *
  * @author 拓仲 on 2020/3/10
  */
 public class RedisQueueImpl implements Queue, java.io.Closeable {
+    /**
+     * LOGGER
+     */
     public static final Logger LOGGER = LoggerFactory.getLogger(RedisQueueImpl.class);
 
     private volatile AtomicBoolean isRunning = new AtomicBoolean(false);
@@ -61,6 +66,9 @@ public class RedisQueueImpl implements Queue, java.io.Closeable {
 
     /**
      * 将Long类型的时间戳转换成String 类型的时间格式，时间格式为：yyyy-MM-dd HH:mm:ss
+     *
+     * @param time time
+     * @return the string
      */
     public static String convertTimeToString(Long time) {
         Assert.notNull(time, "time is null");
@@ -113,18 +121,38 @@ public class RedisQueueImpl implements Queue, java.io.Closeable {
     }
 
 
+    /**
+     * Sets job operation service *
+     *
+     * @param jobOperationService job operation service
+     */
     public void setJobOperationService(JobOperationService jobOperationService) {
         this.jobOperationService = jobOperationService;
     }
 
+    /**
+     * Sets properties *
+     *
+     * @param properties properties
+     */
     public void setProperties(RedisQueueProperties properties) {
         this.properties = properties;
     }
 
+    /**
+     * Sets bucket queue manager *
+     *
+     * @param bucketQueueManager bucket queue manager
+     */
     public void setBucketQueueManager(BucketQueueManager bucketQueueManager) {
         this.bucketQueueManager = bucketQueueManager;
     }
 
+    /**
+     * Sets ready queue manager *
+     *
+     * @param readyQueueManager ready queue manager
+     */
     public void setReadyQueueManager(ReadyQueueManager readyQueueManager) {
         this.readyQueueManager = readyQueueManager;
     }
@@ -132,6 +160,8 @@ public class RedisQueueImpl implements Queue, java.io.Closeable {
 
     /**
      * 根据BuckSize轮询获取
+     *
+     * @return the string
      */
     public String buildQueueName() {
         return NamedUtil.buildBucketName(properties.getPrefix(), properties.getName(), getNextRoundRobin());

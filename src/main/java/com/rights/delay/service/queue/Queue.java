@@ -5,6 +5,8 @@ import com.rights.delay.domain.JobMessage;
 import com.rights.delay.service.queue.Lifecycle;
 
 /**
+ * Queue
+ *
  * @author 拓仲 on 2020/3/10
  */
 public interface Queue extends Lifecycle {
@@ -26,7 +28,7 @@ public interface Queue extends Lifecycle {
      * 删除延迟任务
      *
      * @param jobId 任务消息编号
-     * @return 删除标识
+     * @return 删除标识 boolean
      */
     boolean delete(String jobId);
 
@@ -34,7 +36,7 @@ public interface Queue extends Lifecycle {
      * 获取任务信息
      *
      * @param jobId 任务消息编号
-     * @return 任务信息
+     * @return 任务信息 job
      */
     JobMessage getJob(String jobId);
 }

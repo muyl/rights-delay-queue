@@ -19,6 +19,8 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisCluster;
 
 /**
+ * Redis queue auto configuration
+ *
  * @author 拓仲 on 2020/3/10
  */
 @Configuration
@@ -31,6 +33,11 @@ public class RedisQueueAutoConfiguration {
     @Autowired
     private JedisCluster template;
 
+    /**
+     * Redis support redis support
+     *
+     * @return the redis support
+     */
     @Bean
     public RedisSupport redisSupport() {
         RedisSupport support = new RedisSupport();
@@ -38,17 +45,34 @@ public class RedisQueueAutoConfiguration {
         return support;
     }
 
+    /**
+     * Consume queue provider real time queue provider
+     *
+     * @return the real time queue provider
+     */
     @Bean
     public RealTimeQueueProvider consumeQueueProvider() {
         return new RealTimeQueueConsumer();
     }
 
+    /**
+     * Redis distributed lock redis distributed lock
+     *
+     * @param redisSupport redis support
+     * @return the redis distributed lock
+     */
     @Bean
     @Autowired
     public RedisDistributedLock redisDistributedLock(RedisSupport redisSupport) {
         return new RedisDistributedLock(redisSupport);
     }
 
+    /**
+     * Job operation service job operation service
+     *
+     * @param redisSupport redis support
+     * @return the job operation service
+     */
     @Bean
     @Autowired
     public JobOperationService JobOperationService(RedisSupport redisSupport) {
@@ -59,6 +83,13 @@ public class RedisQueueAutoConfiguration {
     }
 
 
+    /**
+     * Bucket queue manager bucket queue manager
+     *
+     * @param jobOperationService job operation service
+     * @param lock lock
+     * @return the bucket queue manager
+     */
     @Bean
     @Autowired
     public BucketQueueManager BucketQueueManager(JobOperationService jobOperationService, RedisDistributedLock lock) {
@@ -69,6 +100,14 @@ public class RedisQueueAutoConfiguration {
         return manager;
     }
 
+    /**
+     * Ready queue manager ready queue manager
+     *
+     * @param jobOperationService job operation service
+     * @param lock lock
+     * @param realTimeQueueProvider real time queue provider
+     * @return the ready queue manager
+     */
     @Bean
     @Autowired
     public ReadyQueueManager readyQueueManager(JobOperationService jobOperationService, RedisDistributedLock lock, RealTimeQueueProvider realTimeQueueProvider) {
@@ -80,6 +119,14 @@ public class RedisQueueAutoConfiguration {
         return manager;
     }
 
+    /**
+     * Redis queue redis queue
+     *
+     * @param jobOperationService job operation service
+     * @param bucketQueueManager bucket queue manager
+     * @param readyQueueManager ready queue manager
+     * @return the redis queue
+     */
     @Bean
     @Autowired
     public RedisQueueImpl redisQueueImpl(JobOperationService jobOperationService, BucketQueueManager bucketQueueManager, ReadyQueueManager readyQueueManager) {

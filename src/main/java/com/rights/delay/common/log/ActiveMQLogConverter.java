@@ -12,6 +12,8 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
+ * Active mq log converter
+ *
  * @author 拓仲 on 2020/3/31
  */
 public class ActiveMQLogConverter implements MessageConverter {
@@ -38,12 +40,28 @@ public class ActiveMQLogConverter implements MessageConverter {
         return message instanceof TextMessage ? this.extractStringFromMessage((TextMessage) message) : (message instanceof BytesMessage ? this.extractByteArrayFromMessage((BytesMessage) message) : (message instanceof MapMessage ? this.extractMapFromMessage((MapMessage) message) : (message instanceof ObjectMessage ? this.extractSerializableFromMessage((ObjectMessage) message) : message)));
     }
 
+    /**
+     * Create message for string text message
+     *
+     * @param text text
+     * @param session session
+     * @return the text message
+     * @throws JMSException jms exception
+     */
     protected TextMessage createMessageForString(String text, Session session) throws JMSException {
         TextMessage textMessage = session.createTextMessage(text);
         textMessage.setStringProperty(RequestLog.PASSTHROUGH_LOG, RequestLog.getLogStr());
         return textMessage;
     }
 
+    /**
+     * Create message for byte array bytes message
+     *
+     * @param bytes bytes
+     * @param session session
+     * @return the bytes message
+     * @throws JMSException jms exception
+     */
     protected BytesMessage createMessageForByteArray(byte[] bytes, Session session) throws JMSException {
         BytesMessage message = session.createBytesMessage();
         message.writeBytes(bytes);
@@ -51,6 +69,14 @@ public class ActiveMQLogConverter implements MessageConverter {
         return message;
     }
 
+    /**
+     * Create message for map map message
+     *
+     * @param map map
+     * @param session session
+     * @return the map message
+     * @throws JMSException jms exception
+     */
     protected MapMessage createMessageForMap(Map<?, ?> map, Session session) throws JMSException {
         MapMessage message = session.createMapMessage();
         Iterator var4 = map.entrySet().iterator();
@@ -67,12 +93,27 @@ public class ActiveMQLogConverter implements MessageConverter {
         return message;
     }
 
+    /**
+     * Create message for serializable object message
+     *
+     * @param object object
+     * @param session session
+     * @return the object message
+     * @throws JMSException jms exception
+     */
     protected ObjectMessage createMessageForSerializable(Serializable object, Session session) throws JMSException {
         ObjectMessage objectMessage = session.createObjectMessage(object);
         objectMessage.setStringProperty(RequestLog.PASSTHROUGH_LOG, RequestLog.getLogStr());
         return objectMessage;
     }
 
+    /**
+     * Extract string from message string
+     *
+     * @param message message
+     * @return the string
+     * @throws JMSException jms exception
+     */
     protected String extractStringFromMessage(TextMessage message) throws JMSException {
 
         String msg = message.getText();
@@ -81,6 +122,13 @@ public class ActiveMQLogConverter implements MessageConverter {
         return msg;
     }
 
+    /**
+     * Extract byte array from message byte [ ]
+     *
+     * @param message message
+     * @return the byte [ ]
+     * @throws JMSException jms exception
+     */
     protected byte[] extractByteArrayFromMessage(BytesMessage message) throws JMSException {
         byte[] bytes = new byte[(int) message.getBodyLength()];
         message.readBytes(bytes);
@@ -88,6 +136,13 @@ public class ActiveMQLogConverter implements MessageConverter {
         return bytes;
     }
 
+    /**
+     * Extract map from message map
+     *
+     * @param message message
+     * @return the map
+     * @throws JMSException jms exception
+     */
     protected Map<String, Object> extractMapFromMessage(MapMessage message) throws JMSException {
         Map<String, Object> map = new HashMap<>();
         Enumeration en = message.getMapNames();
@@ -102,6 +157,13 @@ public class ActiveMQLogConverter implements MessageConverter {
         return map;
     }
 
+    /**
+     * Extract serializable from message serializable
+     *
+     * @param message message
+     * @return the serializable
+     * @throws JMSException jms exception
+     */
     protected Serializable extractSerializableFromMessage(ObjectMessage message) throws JMSException {
         setMDCLog(message);
         return message.getObject();

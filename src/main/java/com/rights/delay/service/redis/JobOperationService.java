@@ -6,6 +6,8 @@ import com.rights.delay.domain.JobMessage;
 import java.util.List;
 
 /**
+ * Job operation service
+ *
  * @author 拓仲 on 2020/3/10
  */
 public interface JobOperationService {
@@ -14,7 +16,7 @@ public interface JobOperationService {
      * 获取Job元数据
      *
      * @param jobId 任务编号
-     * @return 任务信息
+     * @return 任务信息 job
      */
     JobMessage getJob(String jobId);
 
@@ -35,7 +37,7 @@ public interface JobOperationService {
     /**
      * 更新元任务池任务的状态
      *
-     * @param jobId  任务编号
+     * @param jobId 任务编号
      * @param status 任务状态
      */
     void updateJobStatus(String jobId, Status status);
@@ -51,8 +53,8 @@ public interface JobOperationService {
      * 加一个Job到指定Bucket
      *
      * @param bucketName Bucket
-     * @param JobId      任务编号
-     * @param score      失效时间
+     * @param JobId 任务编号
+     * @param score 失效时间
      */
     void addBucketJob(String bucketName, String JobId, double score);
 
@@ -60,7 +62,7 @@ public interface JobOperationService {
      * 从指定Bucket删除一个Job
      *
      * @param bucketName Bucket
-     * @param jobId      任务编号
+     * @param jobId 任务编号
      */
     void removeBucketKey(String bucketName, String jobId);
 
@@ -68,7 +70,7 @@ public interface JobOperationService {
      * 添加一个Job到 可执行队列
      *
      * @param readyName 实时队列
-     * @param jobId     任务编号
+     * @param jobId 任务编号
      */
     void addReadyTime(String readyName, String jobId);
 
@@ -76,7 +78,7 @@ public interface JobOperationService {
     /**
      * 获取一个实时队列中的第一个数据
      *
-     * @return 任务信息
+     * @return 任务信息 ready job
      */
     String getReadyJob();
 
@@ -84,7 +86,7 @@ public interface JobOperationService {
      * 获取指定个数实时队列中的数据 不是用的POP方式 需要手動刪除
      *
      * @param size 获取数量
-     * @return 任务列表
+     * @return 任务列表 ready job
      */
     List<String> getReadyJob(int size);
 
@@ -92,7 +94,7 @@ public interface JobOperationService {
      * 刪除实时队列中的一个数据
      *
      * @param jobId 任务编号
-     * @return 删除标识
+     * @return 删除标识 boolean
      */
     boolean removeReadyJob(String jobId);
 
@@ -100,7 +102,7 @@ public interface JobOperationService {
      * 获取bucket中最顶端的一个Job
      *
      * @param bucketName 延时队列
-     * @return 任务信息
+     * @return 任务信息 bucket top 1 job
      */
     String getBucketTop1Job(String bucketName);
 
@@ -108,8 +110,8 @@ public interface JobOperationService {
      * 批量获取顶端数据 只获取满足条件的数据 最多<code>size</code>行
      *
      * @param bucketName 延时队列
-     * @param size       任务数量
-     * @return 任务列表
+     * @param size 任务数量
+     * @return 任务列表 bucket top jobs
      */
     List<String> getBucketTopJobs(String bucketName, int size);
 

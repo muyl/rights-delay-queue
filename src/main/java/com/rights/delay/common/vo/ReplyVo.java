@@ -20,13 +20,16 @@ public class ReplyVo<T> {
     private String message;
     private T      data;
 
+    /**
+     * Reply vo
+     */
     public ReplyVo() {
     }
 
     /**
      * Reply vo
      *
-     * @param code    code
+     * @param code code
      * @param message message
      */
     public ReplyVo(String code, String message) {
@@ -48,7 +51,7 @@ public class ReplyVo<T> {
      * Reply vo
      *
      * @param resultEnum result enum
-     * @param data       data
+     * @param data data
      */
     public ReplyVo(ResultEnum resultEnum, T data) {
         this.code = resultEnum.getCode();
@@ -56,6 +59,13 @@ public class ReplyVo<T> {
         this.data = data;
     }
 
+    /**
+     * Reply vo
+     *
+     * @param code code
+     * @param message message
+     * @param data data
+     */
     public ReplyVo(String code, String message, T data) {
         this.code = code;
         this.message = message;

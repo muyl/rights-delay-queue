@@ -16,11 +16,19 @@ import org.springframework.util.StringUtils;
 import java.util.List;
 
 /**
+ * Bucket task
+ *
  * @author 拓仲 on 2020/3/10
  */
 public class BucketTask extends Thread {
+    /**
+     * LOGGER
+     */
     public static final Logger LOGGER = LoggerFactory.getLogger(BucketTask.class);
 
+    /**
+     * TIME_OUT
+     */
     public static final long TIME_OUT = 1000 * 30;
 
     private String bucketName;
@@ -32,6 +40,11 @@ public class BucketTask extends Thread {
     private RedisQueueProperties properties;
 
 
+    /**
+     * Bucket task
+     *
+     * @param bucketName bucket name
+     */
     public BucketTask(String bucketName) {
         this.bucketName = bucketName;
     }
@@ -120,22 +133,47 @@ public class BucketTask extends Thread {
     }
 
 
+    /**
+     * Sets job operation service *
+     *
+     * @param jobOperationService job operation service
+     */
     public void setJobOperationService(JobOperationService jobOperationService) {
         this.jobOperationService = jobOperationService;
     }
 
+    /**
+     * Sets pool name *
+     *
+     * @param poolName pool name
+     */
     public void setPoolName(String poolName) {
         this.poolName = poolName;
     }
 
+    /**
+     * Sets ready name *
+     *
+     * @param readyName ready name
+     */
     public void setReadyName(String readyName) {
         this.readyName = readyName;
     }
 
+    /**
+     * Sets lock *
+     *
+     * @param lock lock
+     */
     public void setLock(DistributedLock lock) {
         this.lock = lock;
     }
 
+    /**
+     * Sets properties *
+     *
+     * @param properties properties
+     */
     public void setProperties(RedisQueueProperties properties) {
         this.properties = properties;
     }

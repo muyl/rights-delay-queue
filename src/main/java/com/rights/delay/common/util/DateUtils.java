@@ -8,41 +8,101 @@ import java.util.Locale;
 import java.util.Map;
 
 
+/**
+ * Date utils
+ */
 public class DateUtils {
 
+    /**
+     * FORMAT_DEFAULT
+     */
     public static final String FORMAT_DEFAULT                 = "yyyy-MM-dd HH:mm:ss";
+    /**
+     * FORMAT_YYYY_MM_DD_HH_MM_SS_SSS
+     */
     public static final String FORMAT_YYYY_MM_DD_HH_MM_SS_SSS = "yyyy-MM-dd HH:mm:ss SSS";
+    /**
+     * FORMAT_TIMESTAMP
+     */
     public static final String FORMAT_TIMESTAMP               = "yyyy-MM-dd_HH_mm_ss_SSS";
+    /**
+     * FORMAT_YYYYMMDD
+     */
     public static final String FORMAT_YYYYMMDD                = "yyyyMMdd";
 
+    /**
+     * FORMAT_DATE
+     */
     public static final String FORMAT_DATE = "yyyy-MM-dd";
 
+    /**
+     * FORMAT_MONTH
+     */
     public static final String FORMAT_MONTH = "yyyy-MM";
 
+    /**
+     * FORMAT_TIME
+     */
     public static final String FORMAT_TIME = "HH:mm:ss";
 
+    /**
+     * FORMAT_SHORT_DATE_TIME
+     */
     public static final String FORMAT_SHORT_DATE_TIME = "MM-dd HH:mm";
 
+    /**
+     * FORMAT_DATE_TIME
+     */
     public static final String FORMAT_DATE_TIME = FORMAT_DEFAULT;
 
+    /**
+     * FORMAT_NO_SECOND
+     */
     public static final String FORMAT_NO_SECOND = "yyyy-MM-dd HH:mm";
 
+    /**
+     * FORMAT_JAPAN
+     */
     public static final String FORMAT_JAPAN = "MM.dd(EEE) HH";
 
+    /**
+     * FORMAT_CHINESE_NO_SECOND
+     */
     public static final String FORMAT_CHINESE_NO_SECOND = "yyyy年MM月dd日 HH:mm";
 
+    /**
+     * FORMAT_CHINESE_NO_SECOND_1
+     */
     public static final String FORMAT_CHINESE_NO_SECOND_1 = "yyyy年MM月dd日HH:mm";
 
+    /**
+     * FORMAT_CHINESE
+     */
     public static final String FORMAT_CHINESE = "yyyy年MM月dd日 HH点mm分";
 
+    /**
+     * FROMAT_CHAINESE_WEEK_SECOND
+     */
     public static final String FROMAT_CHAINESE_WEEK_SECOND = "yyyy-MM-dd(E) HH:mm";
 
+    /**
+     * TYPE_HTML_SPACE
+     */
     public static final int TYPE_HTML_SPACE = 2;
 
+    /**
+     * TYPE_DECREASE_SYMBOL
+     */
     public static final int TYPE_DECREASE_SYMBOL = 3;
 
+    /**
+     * TYPE_SPACE
+     */
     public static final int TYPE_SPACE = 4;
 
+    /**
+     * TYPE_NULL
+     */
     public static final int                           TYPE_NULL = 5;
     private static      Map<String, SimpleDateFormat> formaters = new HashMap<String, SimpleDateFormat>();
 
@@ -64,6 +124,11 @@ public class DateUtils {
         formaters.put(FORMAT_TIMESTAMP, new SimpleDateFormat(FORMAT_TIMESTAMP, Locale.CHINA));
     }
 
+    /**
+     * Gets formaters *
+     *
+     * @return the formaters
+     */
     public static Map<String, SimpleDateFormat> getFormaters() {
         return formaters;
     }
@@ -71,9 +136,9 @@ public class DateUtils {
     /**
      * 使用给定的 pattern 对日期进格式化为字符串
      *
-     * @param date    待格式化的日期
+     * @param date 待格式化的日期
      * @param pattern 格式字符串
-     * @return 格式化后的日期字符串
+     * @return 格式化后的日期字符串 string
      */
     public static String format(Date date, String pattern) {
         SimpleDateFormat dateFormat;
@@ -89,13 +154,21 @@ public class DateUtils {
      * 以默认日期格式(yyyy-MM-dd HH:mm:ss)对日期进行格式化
      *
      * @param date 待格式化的日期
-     * @return 格式化后的日期字符串
+     * @return 格式化后的日期字符串 string
      */
     public static String format(Date date) {
         return formaters.get(FORMAT_DEFAULT).format(date);
     }
 
 
+    /**
+     * Format string
+     *
+     * @param date date
+     * @param format format
+     * @param type type
+     * @return the string
+     */
     public static String format(Date date,
                                 String format,
                                 int type) {
@@ -144,7 +217,7 @@ public class DateUtils {
      * 将给定字符串解析为对应格式的日期,循环尝试使用预定义的日期格式进行解析
      *
      * @param str 待解析的日期字符串
-     * @return 解析成功的日期，解析失败返回null
+     * @return 解析成功的日期 ，解析失败返回null
      */
     public static Date parse(String str) {
         Date date = null;

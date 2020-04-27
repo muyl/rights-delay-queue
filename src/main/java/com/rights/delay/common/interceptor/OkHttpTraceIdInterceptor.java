@@ -9,6 +9,8 @@ import org.slf4j.MDC;
 import java.io.IOException;
 
 /**
+ * Ok http trace id interceptor
+ *
  * @author 拓仲 on 2020/3/28
  */
 public class OkHttpTraceIdInterceptor implements Interceptor {

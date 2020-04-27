@@ -12,6 +12,8 @@ import javax.jms.Destination;
 
 
 /**
+ * Message producer
+ *
  * @author 拓仲 on 2020/3/29
  */
 @Service("messageProducer")
@@ -29,8 +31,8 @@ public class MessageProducer {
     /**
      * 发送消息
      *
-     * @param queueName
-     * @param message
+     * @param queueName queue name
+     * @param message message
      */
     public void sendMessage(String queueName, String message) {
         if (StringUtils.isEmpty(queueName)) {

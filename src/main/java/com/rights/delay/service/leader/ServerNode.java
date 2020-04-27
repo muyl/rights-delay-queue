@@ -5,8 +5,20 @@ package com.rights.delay.service.leader;
  */
 public class ServerNode {
 
+    /**
+     * DIR_SPLITE
+     */
     public static final String DIR_SPLITE  = "/";
+    /**
+     * ROOT
+     */
     public static final String ROOT        = "dq";
+    /**
+     * LEADERLATCH
+     */
     public static final String LEADERLATCH = DIR_SPLITE + ROOT + DIR_SPLITE + "latch";
+    /**
+     * NAMESPACE
+     */
     public static       String NAMESPACE   = "io-sdmq";
 }

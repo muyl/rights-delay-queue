@@ -4,6 +4,8 @@ package com.rights.delay.common.util;
 import java.util.UUID;
 
 /**
+ * Uuid utils
+ *
  * @author tony
  * @version 1.0
  */
@@ -15,7 +17,7 @@ public final class UUIDUtils {
     /**
      * 获取uuid
      *
-     * @return UUID
+     * @return UUID uuid
      */
     public static String getUUID() {
         UUID uuid = UUID.randomUUID();

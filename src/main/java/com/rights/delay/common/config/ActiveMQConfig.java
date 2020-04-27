@@ -15,6 +15,8 @@ import org.springframework.jms.support.converter.MessageConverter;
 import javax.jms.ConnectionFactory;
 
 /**
+ * Active mq config
+ *
  * @author 拓仲 on 2020/3/29
  */
 @Configuration
@@ -22,6 +24,11 @@ import javax.jms.ConnectionFactory;
 public class ActiveMQConfig {
 
 
+    /**
+     * Redelivery policy redelivery policy
+     *
+     * @return the redelivery policy
+     */
     @Bean
     public RedeliveryPolicy redeliveryPolicy(){
         RedeliveryPolicy redeliveryPolicy=   new RedeliveryPolicy();
@@ -40,6 +47,13 @@ public class ActiveMQConfig {
         return redeliveryPolicy;
     }
 
+    /**
+     * Connection factory connection factory
+     *
+     * @param properties properties
+     * @param redeliveryPolicy redelivery policy
+     * @return the connection factory
+     */
     @Bean("connectionFactory")
     public ConnectionFactory connectionFactory(ActiveMQProperties properties, RedeliveryPolicy redeliveryPolicy){
         ActiveMQConnectionFactory activeMQConnectionFactory =
@@ -52,12 +66,24 @@ public class ActiveMQConfig {
     }
 
 
+    /**
+     * Active mq log converter message converter
+     *
+     * @return the message converter
+     */
     @Bean("activeMQLogConverter")
     public MessageConverter activeMQLogConverter() {
         return new ActiveMQLogConverter();
     }
 
 
+    /**
+     * Jms template jms template
+     *
+     * @param activeMQLogConverter active mq log converter
+     * @param connectionFactory connection factory
+     * @return the jms template
+     */
     @Bean("jmsTemplate")
     JmsTemplate jmsTemplate(MessageConverter activeMQLogConverter, ConnectionFactory connectionFactory) {
         JmsTemplate jmsTemplate = new JmsTemplate();
@@ -68,6 +94,12 @@ public class ActiveMQConfig {
         return jmsTemplate;
     }
 
+    /**
+     * Jms listener queue container jms listener container factory
+     *
+     * @param connectionFactory connection factory
+     * @return the jms listener container factory
+     */
     @Bean
     public JmsListenerContainerFactory jmsListenerQueueContainer(ConnectionFactory connectionFactory){
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
@@ -79,6 +111,12 @@ public class ActiveMQConfig {
         return  factory;
     }
 
+    /**
+     * Jms listener topic container jms listener container factory
+     *
+     * @param connectionFactory connection factory
+     * @return the jms listener container factory
+     */
     @Bean
     public JmsListenerContainerFactory jmsListenerTopicContainer(ConnectionFactory connectionFactory){
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();

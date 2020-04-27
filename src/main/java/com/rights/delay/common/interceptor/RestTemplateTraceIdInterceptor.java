@@ -14,7 +14,7 @@ import java.io.IOException;
  *
  * @author hetiantian
  * @version 1.0
- * @Date 2020/03/19 15:59
+ * @Date 2020 /03/19 15:59
  */
 public class RestTemplateTraceIdInterceptor implements ClientHttpRequestInterceptor {
     @Override

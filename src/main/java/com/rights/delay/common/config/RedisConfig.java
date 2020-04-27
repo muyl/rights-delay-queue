@@ -13,6 +13,8 @@ import redis.clients.jedis.JedisCluster;
 import java.util.*;
 
 /**
+ * Redis config
+ *
  * @author 拓仲 on 2020/3/10
  */
 @Configuration
@@ -31,6 +33,11 @@ public class RedisConfig {
     private int                  commandTimeout;
 
 
+    /**
+     * Jedis cluster jedis cluster
+     *
+     * @return the jedis cluster
+     */
     @Bean
     public JedisCluster jedisCluster() {
         Set<HostAndPort> nodes = new HashSet<>();

@@ -1,6 +1,8 @@
 package com.rights.delay.domain;
 
 /**
+ * Status
+ *
  * @author muyl
  */
 public enum Status {
