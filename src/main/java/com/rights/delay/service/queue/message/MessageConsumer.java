@@ -21,7 +21,7 @@ public class MessageConsumer {
      *
      * @param text text
      */
-    @JmsListener(destination = "a",containerFactory = "jmsListenerQueueContainer")
+    @JmsListener(destination = "v",containerFactory = "jmsListenerQueueContainer")
     public void receiveQueue(String text) {
         logger.info("Consumer收到的报文为:" + text);
     }

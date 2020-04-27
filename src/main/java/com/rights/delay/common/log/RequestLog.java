@@ -72,8 +72,10 @@ public class RequestLog implements Serializable {
      * @return the log str
      */
     public static String getLogStr() {
+        if (null == MDC.get(REQ_ID)) {
+            putEmptyMDC();
+        }
         StringBuffer sb = new StringBuffer();
-
         sb.append(MDC.get(REQ_ID)).append("#");
         sb.append(MDC.get(REQ_USERIP)).append("#");
 

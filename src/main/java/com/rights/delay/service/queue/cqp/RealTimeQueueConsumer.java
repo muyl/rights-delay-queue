@@ -5,6 +5,8 @@ import com.rights.delay.domain.JobMessage;
 import com.rights.delay.service.queue.core.RealTimeQueueProvider;
 import com.rights.delay.common.util.JsonUtil;
 import com.rights.delay.service.queue.message.MessageProducer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -13,12 +15,12 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author 拓仲 on 2020/3/11
  */
 public class RealTimeQueueConsumer implements RealTimeQueueProvider {
+    private static final Logger LOGGER = LoggerFactory.getLogger(RealTimeQueueConsumer.class);
 
     private MessageProducer messageProducer;
 
     @Override
     public void sendMessage(JobMessage job) throws ConsumeQueueException {
-        System.out.println(String.format("invoke topic %s json:%s", job.getTopic(), JsonUtil.convertObjectToJSON(job)));
         String topic = job.getTopic();
         String body = job.getBody();
         messageProducer.sendMessage(topic, body);

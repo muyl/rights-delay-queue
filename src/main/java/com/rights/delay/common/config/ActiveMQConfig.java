@@ -101,13 +101,13 @@ public class ActiveMQConfig {
      * @return the jms listener container factory
      */
     @Bean
-    public JmsListenerContainerFactory jmsListenerQueueContainer(ConnectionFactory connectionFactory){
+    public JmsListenerContainerFactory jmsListenerQueueContainer(MessageConverter activeMQLogConverter,ConnectionFactory connectionFactory){
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory);
         //设置连接数
         factory.setConcurrency("1-10");
         factory.setPubSubDomain(Boolean.FALSE);
-        factory.setMessageConverter(new ActiveMQLogConverter());
+        factory.setMessageConverter(activeMQLogConverter);
         return  factory;
     }
 

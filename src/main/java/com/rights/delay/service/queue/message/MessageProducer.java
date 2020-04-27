@@ -35,8 +35,8 @@ public class MessageProducer {
      * @param message message
      */
     public void sendMessage(String queueName, String message) {
-        logger.info("发送消息：{}", message);
         Destination destination = new ActiveMQQueue(queueName);
         sendMessage(destination, message);
+        logger.info("发送消息：{}", message);
     }
 }
