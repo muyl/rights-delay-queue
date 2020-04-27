@@ -137,7 +137,7 @@ public class ActiveMQLogConverter implements MessageConverter {
     }
 
     /**
-     * Extract map from message map
+     * Extract map from message map111
      *
      * @param message message
      * @return the map
