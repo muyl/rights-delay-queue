@@ -2,6 +2,7 @@ package com.rights.delay.common.configuration;
 
 import com.rights.delay.service.queue.core.RealTimeQueueProvider;
 import com.rights.delay.service.queue.cqp.RealTimeQueueConsumer;
+import com.rights.delay.service.queue.message.MessageProducer;
 import com.rights.delay.service.redis.JobOperationService;
 import com.rights.delay.service.redis.JobOperationServiceImpl;
 import com.rights.delay.service.redis.RedisQueueImpl;
@@ -51,8 +52,10 @@ public class RedisQueueAutoConfiguration {
      * @return the real time queue provider
      */
     @Bean
-    public RealTimeQueueProvider consumeQueueProvider() {
-        return new RealTimeQueueConsumer();
+    public RealTimeQueueProvider consumeQueueProvider(MessageProducer producer) {
+        RealTimeQueueConsumer consumer = new RealTimeQueueConsumer();
+        consumer.setMessageProducer(producer);
+        return consumer;
     }
 
     /**

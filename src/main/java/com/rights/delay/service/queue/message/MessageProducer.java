@@ -35,10 +35,6 @@ public class MessageProducer {
      * @param message message
      */
     public void sendMessage(String queueName, String message) {
-        if (StringUtils.isEmpty(queueName)) {
-            System.out.println("queueName不能为空");
-            return;
-        }
         logger.info("发送消息：{}", message);
         Destination destination = new ActiveMQQueue(queueName);
         sendMessage(destination, message);
