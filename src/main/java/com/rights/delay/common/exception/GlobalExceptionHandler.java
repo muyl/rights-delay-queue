@@ -85,7 +85,7 @@ public class GlobalExceptionHandler {
         } else if (e instanceof HttpMessageNotReadableException) {
             replyVo = ReplyVo.builder()
                     .code(ResultEnum.HTTP_MESSAGE_NOT_READABLE_EXCEPTION.getCode())
-                    .message(ResultEnum.HTTP_MESSAGE_NOT_READABLE_EXCEPTION.getMessage())
+                    .message(e.getMessage())
                     .build();
         } else {
             //如果是系统逻辑异常，不打印

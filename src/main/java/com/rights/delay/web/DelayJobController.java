@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 /**
  * Delay job controller
@@ -32,9 +33,7 @@ public class DelayJobController {
      */
     @RequestMapping(value = "/sendMessage.json", method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public void sendMessage(@RequestBody DelayMessage delayMessage) {
-        Assert.notNull(delayMessage.getTopic(), "请求参数topic缺失");
-
+    public void sendMessage(@Valid @RequestBody DelayMessage delayMessage) {
         JobMessage job  = new JobMessage();
         job.setBody(delayMessage.getBody());
         job.setTopic(delayMessage.getTopic());
